@@ -1,0 +1,38 @@
+<div class="admin-orders-container">
+  <h2 class="admin-orders-title">Orders Management</h2>
+  <table class="table admin-orders-table">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Customer</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% orders.forEach(order => { %>
+        <tr>
+          <td><%= order._id %></td>
+          <td><%= order.customerName %></td>
+          <td>$<%= order.totalAmount.toFixed(2) %></td>
+          <td class="order-status <%= order.status.toLowerCase() %>"><%= order.status %></td>
+          <td><%= order.createdAt.toLocaleString() %></td>
+          <td>
+            <% if(order.status === 'Pending') { %>
+              <form action="/admin/orders/<%= order._id %>/confirm" method="POST" style="display:inline;">
+                <button class="btn btn-success btn-sm">Confirm</button>
+              </form>
+              <form action="/admin/orders/<%= order._id %>/cancel" method="POST" style="display:inline;">
+                <button class="btn btn-danger btn-sm">Cancel</button>
+              </form>
+            <% } else { %>
+              <span class="text-muted">No actions</span>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

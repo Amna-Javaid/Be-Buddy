@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body style="background:#f8fafc;">
+    <header style="background:linear-gradient(90deg,#032d3d 60%,#1a2636 100%);color:#fff;padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+        <div style="display:flex;align-items:center;gap:1rem;">
+            <h2 style="font-size:1.6rem;font-weight:700;letter-spacing:1px;">Admin Panel</h2>
+        </div>
+        <span style="font-size:1rem;opacity:0.8;">Welcome, Admin</span>
+    </header>
+    <nav class="admin-nav">
+        <a href="/admin">Dashboard</a>
+        <a href="/admin/orders">Orders</a>
+        <a href="/admin/products">Products</a>
+        <a href="/admin/products/add">Add Product</a>
+    </nav>
+    <main class="admin-main">
+        <%- body %>
+    </main>
+    <footer style="text-align:center;padding:1.5rem 0;color:#888;font-size:0.95rem;">
+        &copy; <span id="year"></span> E-Commerce Admin Panel
+    </footer>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

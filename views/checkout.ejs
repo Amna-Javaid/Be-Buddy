@@ -1,0 +1,32 @@
+<%- include('partials/navbar') %>
+<div class="container checkout-container">
+  <h2 class="checkout-title">Checkout</h2>
+  <form action="/checkout" method="POST" class="checkout-form">
+    <div class="mb-3">
+      <label for="customerName" class="form-label">Name</label>
+      <input type="text" class="form-control" id="customerName" name="customerName" required>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+    <h4 class="checkout-cart-title">Cart Items</h4>
+    <ul class="list-group mb-3 checkout-cart-list">
+      <% if (cart.length === 0) { %>
+        <li class="list-group-item">Your cart is empty.</li>
+      <% } else { %>
+        <% cart.forEach(item => { %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span><strong><%= item.name %></strong> (x<%= item.quantity %>)</span>
+            <span>$<%= (item.price * item.quantity).toFixed(2) %></span>
+          </li>
+        <% }) %>
+      <% } %>
+    </ul>
+    <div class="mb-3 checkout-total-box">
+      <strong>Total: $<%= total.toFixed(2) %></strong>
+    </div>
+    <button type="submit" class="btn btn-primary checkout-btn" <%= cart.length === 0 ? 'disabled' : '' %>>Place Order</button>
+  </form>
+</div>
+<%- include('partials/footer') %>
