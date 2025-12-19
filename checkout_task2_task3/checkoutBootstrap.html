@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .step-header {
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 40px;
+    }
+    .step-header .step {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 8px 15px;
+      border-radius: 20px;
+      background-color: #e9ecef;
+      color: #6c757d;
+      font-weight: 500;
+    }
+    .step-header .step.active {
+      background-color: #ef68e4;
+      color: #fff;
+    }
+    .sticky-summary {
+      position: sticky;
+      top: 20px;
+    }
+    .btn{
+      background-color: #ef68e4;
+      color: #fff;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+  <div class="container step-header">
+    <span class="step">Cart</span>
+    <span class="step">Address</span>
+    <span class="step">Payment</span>
+    <span class="step active">Review</span>
+  </div>
+
+  <div class="container">
+    <div class="row g-4">
+     
+      <div class="col-12 col-md-7">
+        <div class="card p-4 shadow-sm">
+          <h4 class="mb-4">Customer & Shipping Information</h4>
+          <form id="checkoutForm" novalidate>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="fullname" placeholder="Full Name" required>
+              <label for="fullname">Full Name</label>
+              <div class="invalid-feedback">Please enter your full name.</div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="email" class="form-control" id="email" placeholder="Email" required>
+              <label for="email">Email</label>
+              <div class="invalid-feedback">Please enter a valid email address.</div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="tel" class="form-control" id="phone" placeholder="Phone" required>
+              <label for="phone">Phone</label>
+              <div class="invalid-feedback">Please enter your phone number.</div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="postal" placeholder="Postal Code" required>
+              <label for="postal">Postal Code</label>
+              <div class="invalid-feedback">Please enter postal code.</div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="address" placeholder="Address" required>
+              <label for="address">Address</label>
+              <div class="invalid-feedback">Please enter your address.</div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="city" placeholder="City" required>
+              <label for="city">City</label>
+              <div class="invalid-feedback">Please enter your city.</div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-floating">
+              <select class="form-select" id="country" required>
+                <option value="">Select Country</option>
+                <option value="US">United States</option>
+                <option value="UK">United Kingdom</option>
+                <option value="PK">Pakistan</option>
+              </select>
+              <label for="country">Country</label>
+              <div class="invalid-feedback">Please select your country.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-check mt-3">
+          <input class="form-check-input" type="checkbox" id="billingCheck">
+          <label class="form-check-label" for="billingCheck">
+            Billing same as shipping
+          </label>
+        </div>
+
+        <hr class="my-4">
+
+        
+        <h5 class="mb-3">Payment Method</h5>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="payment" id="cardOption" value="card" required>
+          <label class="form-check-label" for="cardOption">Credit/Debit Card</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="payment" id="codOption" value="cod" required>
+          <label class="form-check-label" for="codOption">Cash on Delivery</label>
+        </div>
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="radio" name="payment" id="walletOption" value="wallet" required>
+          <label class="form-check-label" for="walletOption">Wallet</label>
+        </div>
+
+      
+        <div id="cardDetails" class="d-none">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="cardName" placeholder="Cardholder Name">
+                <label for="cardName">Cardholder Name</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="cardNumber" placeholder="1111-2222-3333-4444">
+                <label for="cardNumber">Card Number</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="expiry" placeholder="MM/YY">
+                <label for="expiry">Expiry</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-floating">
+                <input type="text" class="form-control" id="cvv" placeholder="CVV">
+                <label for="cvv">CVV</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+       
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" id="termsCheck">
+          <label class="form-check-label" for="termsCheck">
+            I agree to the terms and conditions
+          </label>
+        </div>
+
+        <button type="submit" class="btn  w-100" id="placeOrderBtn" disabled>
+          Place Order
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+
+  <div class="col-12 col-md-5">
+    <div class="card shadow-sm p-4 sticky-summary">
+      <h4 class="mb-3">Order Summary</h4>
+      <ul class="list-group mb-3">
+        <li class="list-group-item d-flex justify-content-between lh-sm">
+          <div><h6 class="my-0">Product 1</h6><small class="text-muted">Qty: 1</small></div>
+          <span>$20.00</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between lh-sm">
+          <div><h6 class="my-0">Product 2</h6><small class="text-muted">Qty: 2</small></div>
+          <span>$30.00</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Subtotal</span>
+          <strong>$50.00</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Shipping</span>
+          <strong>$5.00</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Tax</span>
+          <strong>$2.50</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Total</span>
+          <strong>$57.50</strong>
+        </li>
+      </ul>
+
+    
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Coupon code">
+        <button class="btn btn-outline-success" type="button">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    
+    document.querySelectorAll('input[name="payment"]').forEach((input) => {
+      input.addEventListener("change", function () {
+        const cardSection = document.getElementById("cardDetails");
+        if (this.value === "card") {
+          cardSection.classList.remove("d-none");
+        } else {
+          cardSection.classList.add("d-none");
+        }
+      });
+    });
+
+   
+    document.getElementById("termsCheck").addEventListener("change", function () {
+      document.getElementById("placeOrderBtn").disabled = !this.checked;
+    });
+
+    
+    (function () {
+      
+      const form = document.getElementById('checkoutForm');
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        } else {
+          event.preventDefault();
+          alert('Order placed successfully!');
+          form.reset();
+          document.getElementById("placeOrderBtn").disabled = true;
+        }
+        
+      }, false);
+    })();
+  </script>
+
+</body>
+</html>
